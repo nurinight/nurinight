@@ -1,91 +1,36 @@
-import turtle
-
-# 设置初始位置
-turtle.penup()
-turtle.left(90)
-turtle.fd(200)
-turtle.pendown()
-turtle.right(90)
-
-# 花蕊
-turtle.fillcolor("red")
-turtle.begin_fill()
-turtle.circle(10, 180)
-turtle.circle(25, 110)
-turtle.left(50)
-turtle.circle(60, 45)
-turtle.circle(20, 170)
-turtle.right(24)
-turtle.fd(30)
-turtle.left(10)
-turtle.circle(30, 110)
-turtle.fd(20)
-turtle.left(40)
-turtle.circle(90, 70)
-turtle.circle(30, 150)
-turtle.right(30)
-turtle.fd(15)
-turtle.circle(80, 90)
-turtle.left(15)
-turtle.fd(45)
-turtle.right(165)
-turtle.fd(20)
-turtle.left(155)
-turtle.circle(150, 80)
-turtle.left(50)
-turtle.circle(150, 90)
-turtle.end_fill()
-
-# 花瓣1
-turtle.left(150)
-turtle.circle(-90, 70)
-turtle.left(20)
-turtle.circle(75, 105)
-turtle.setheading(60)
-turtle.circle(80, 98)
-turtle.circle(-90, 40)
-
-# 花瓣2
-turtle.left(180)
-turtle.circle(90, 40)
-turtle.circle(-80, 98)
-turtle.setheading(-83)
-
-# 叶子1
-turtle.fd(30)
-turtle.left(90)
-turtle.fd(25)
-turtle.left(45)
-turtle.fillcolor("green")
-turtle.begin_fill()
-turtle.circle(-80, 90)
-turtle.right(90)
-turtle.circle(-80, 90)
-turtle.end_fill()
-
-turtle.right(135)
-turtle.fd(60)
-turtle.left(180)
-turtle.fd(85)
-turtle.left(90)
-turtle.fd(80)
-
-# 叶子2
-turtle.right(90)
-turtle.right(45)
-turtle.fillcolor("green")
-turtle.begin_fill()
-turtle.circle(80, 90)
-turtle.left(90)
-turtle.circle(80, 90)
-turtle.end_fill()
-
-turtle.left(135)
-turtle.fd(60)
-turtle.left(180)
-turtle.fd(60)
-turtle.right(90)
-turtle.circle(200, 60)
-turtle.pendown()
-turtle.done()
-
+p=[1739.94 373.3 1756.77 864.45 222.85 877.88 1803.58 2352.12 401.3 363.34...
+    1571.17 104.8 499.85...
+    2297.28 2092.62 1418.79 1845.59 2205.36 2949.16 1692.62 1680.67 2802.88...
+    172.78 2063.54 1449.58...
+    1651.52 341.59 291.02 237.63;
+    1675.15 3087.05 1652 1647.31 3059.54 2031.66 1583.12 2557.04 3259.94...
+    3477.95 1731.04 3389.83...
+    3305.75 3340.14 3177.21 1775.89 1918.81 3243.74 3244.44 1867.5 1575.78...
+    3017.11 3084.49 3199.76...
+    1641.58 1713.28 3076.62 3095.68 3077.78;
+    2395.96 2429.47 1514.98 2665.9 2002.33 3071.18 2163.05 1411.53 2150.98...
+    2462.86 1735.33 2421.83...
+    2196.22 535.62 584.32 2772.9 2226.49 1202.69 662.42 2108.97 1725.1 1984.98...
+    2328.65 1257.21...
+    3405.12 1570.38 2438.63 2088.95 2251.96];
+t=[0 1 0 0 1 0 0 0 1 1 0 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 1 1 1;
+   1 0 1 0 0 0 1 0 0 0 1 0 0 0 0 0 1 0 0 1 1 0 0 0 0 1 0 0 0;
+   0 0 0 0 0 0 0 1 0 0 0 0 0 1 1 0 0 1 1 0 0 1 0 1 0 0 0 0 0;
+   0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0];
+net=newff(minmax(p),[12,4],{'tansig','logsig'},'trainlm');
+net.trainParam.epochs=500;
+net.trainParam.goal=0.01;
+net=train(net,p,t);
+p_test=[1702.8 1877.93 867.81 1831.49 460.69 2374.98 2271.89 1783.64...
+    198.83 1494.63 1597.03 1598.93 1243.13 2336.31 354 2144.47...
+    426.31 1507.13 343.07 2201.94 2232.43 1580.1 1962.4 1495.18...
+    1125.17 24.22 1269.07 1802.07 1817.36 1860.45;
+    1639.79 1860.96 2334.68 1713.11 3274.77 3346.98 3482.97 1597.99...
+    3250.45 2072.59 1972.52 1921.08 1814.07 2640.26 3300.12 2501.62...
+    3105.29 1556.89 3271.72 3196.22 3077.87 1752.07 1594.97 1957.44...
+    1594.39 3447.31 1910.72 1725.81 1927.4 1782.88;
+    2068.74 1975.3 2535.1 1604.68 2172.99 975.31 946.7 2261.31...
+    2445.08 2550.51 2126.76 1623.33 3441.07 1599.63 2373.61...
+    591.51 2057.8 1954.51 2036.94 935.53 1298.87 2463.04 1835.95...
+    3498.02 2937.73 2145.01 2701.97 1966.35 2328.79 1875.83];
+y=sim(net,p_test);
