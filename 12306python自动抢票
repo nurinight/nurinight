@@ -1,0 +1,41 @@
+import webbrowser,requests,bs4,os,time
+import pyautogui
+fn = 'https://www.12306.cn/index/'
+webbrowser.open(fn)
+htmlfile = requests.get(fn)
+print(htmlfile)
+print(len(htmlfile.text))
+pyautogui.moveTo(1755,169)
+time.sleep(1)
+pyautogui.doubleClick(1755,169,button = 'left')
+pyautogui.moveTo(1439,481)
+time.sleep(2)
+pyautogui.doubleClick(1439,481,button = 'left')
+pyautogui.typewrite('***************')#账号
+pyautogui.doubleClick(1400,400,button = 'left')
+time.sleep(1)
+pyautogui.doubleClick(1457,580,button = 'left')
+pyautogui.typewrite('**************')#密码
+pyautogui.doubleClick(1580,660,button = 'left')
+pyautogui.moveTo(719,664)
+pyautogui.dragTo(719,664,duration =1)
+pyautogui.dragRel(1192,656,duration=0.5)
+time.sleep(2)
+pyautogui.doubleClick(958,742,button='left') #确定
+time.sleep(2)
+#pyautogui.scroll(100)
+pyautogui.doubleClick(167,261,button='left')  #首页
+time.sleep(1)
+pyautogui.click(564,525,button='left')
+pyautogui.typewrite('**')#出发地
+time.sleep(1)
+pyautogui.doubleClick(588,589,button='left')
+time.sleep(1)
+pyautogui.typewrite('***',0.5)#目的地
+time.sleep(1)#测试
+pyautogui.doubleClick(548,661,button='left')
+#today=input('请输入车次日期:')
+pyautogui.typewrite(['backspace','backspace','backspace','backspace','backspace','backspace','backspace','backspace','backspace','backspace'],0.5)
+time.sleep(1)
+pyautogui.typewrite('2022-8-28')
+pyautogui.click(277,773)
